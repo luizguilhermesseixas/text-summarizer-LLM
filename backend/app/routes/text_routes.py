@@ -36,13 +36,11 @@ async def summarize_text(
         HTTPException: Em caso de erro no processamento
     """
     try:
-        # Gera o resumo usando o serviço
         result = openai_service.generate_summary(
             text=request.text,
             summary_type=request.summary_type
         )
         
-        # Retorna a resposta formatada
         return SummaryResponse(
             original_text=request.text,
             summary_type=request.summary_type,

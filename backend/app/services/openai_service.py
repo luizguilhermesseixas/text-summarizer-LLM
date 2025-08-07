@@ -7,7 +7,6 @@ class OpenAIService:
         self.api_key = api_key
         openai.api_key = api_key
         
-        # Configuração dos prompts por tipo de resumo
         self.size_prompts = {
             "pequeno": "Faça um resumo muito conciso, com no máximo 50 palavras.",
             "medio": "Faça um resumo moderado, com aproximadamente 100-150 palavras.",
