@@ -1,7 +1,35 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.config import Config
+from app.routes import text_router
 
-app = FastAPI()
+Config.validate()
+
+app = FastAPI(
+    title="Text Summarizer API",
+    description="API para geração de resumos de texto usando OpenAI",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Frontend Next.js
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(text_router)
 
 @app.get("/")
 def read_root():
-    return {"mensagem": "API do Resumidor de Texto está no ar!"}
+    """
+    Endpoint raiz da API
+    """
+    return {
+        "message": "API do Resumidor de Texto está no ar!",
+        "version": "1.0.0",
+        "docs": "/docs"
+    }
