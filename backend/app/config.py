@@ -11,4 +11,4 @@ class Config:
     @classmethod
     def validate(cls):
         if not cls.OPENAI_API_KEY:
-            raise ValueError("OPENAI_API_KEY não configurada. Configure a variável de ambiente OPENAI_API_KEY.") 
+            raise ValueError("OPENAI_API_KEY not configured. Set the OPENAI_API_KEY environment variable.") 
