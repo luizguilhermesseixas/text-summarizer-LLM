@@ -1,5 +1,5 @@
 class OpenAIException(Exception):
-    """Exceção customizada para erros relacionados à API da OpenAI"""
+    """Custom exception for errors related to the OpenAI API"""
     
     def __init__(self, message: str):
         self.message = message

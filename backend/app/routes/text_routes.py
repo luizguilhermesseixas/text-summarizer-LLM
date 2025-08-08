@@ -9,11 +9,11 @@ router = APIRouter(prefix="/api/v1", tags=["text"])
 @router.get("/health")
 def health_check():
     """
-    Endpoint de verificação de saúde da API
+    API health check endpoint
     """
     return {
         "status": "healthy", 
-        "message": "API funcionando corretamente",
+        "message": "API working correctly",
         "version": "1.0.0"
     }
 
@@ -23,17 +23,17 @@ async def summarize_text(
     openai_service: OpenAIService = Depends(get_openai_service)
 ):
     """
-    Gera um resumo do texto fornecido
+    Generates a summary of the provided text
     
     Args:
-        request: Dados da requisição contendo o texto e tipo de resumo
-        openai_service: Serviço da OpenAI injetado via dependência
+        request: Request data containing the text and summary type
+        openai_service: OpenAI service injected via dependency
         
     Returns:
-        Resumo gerado com informações adicionais
+        Generated summary with additional information
         
     Raises:
-        HTTPException: Em caso de erro no processamento
+        HTTPException: In case of processing error
     """
     try:
         result = openai_service.generate_summary(
@@ -53,4 +53,4 @@ async def summarize_text(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno do servidor: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}") 

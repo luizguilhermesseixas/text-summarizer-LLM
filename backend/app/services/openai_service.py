@@ -8,25 +8,25 @@ class OpenAIService:
         openai.api_key = api_key
         
         self.size_prompts = {
-            "pequeno": "Faça um resumo muito conciso, com no máximo 50 palavras.",
-            "medio": "Faça um resumo moderado, com aproximadamente 100-150 palavras.",
-            "grande": "Faça um resumo detalhado, com aproximadamente 200-300 palavras."
+            "small": "Make a very concise summary, with a maximum of 50 words.",
+            "medium": "Make a moderate summary, with approximately 100-150 words.",
+            "large": "Make a detailed summary, with approximately 200-300 words."
         }
     
     def generate_summary(self, text: str, summary_type: str) -> Dict[str, Any]:
         """
-        Gera um resumo do texto usando a API da OpenAI
+        Generates a summary of the text using the OpenAI API
         
         Args:
-            text: Texto original para ser resumido
-            summary_type: Tipo de resumo (pequeno, medio, grande)
+            text: Original text to be summarized
+            summary_type: Summary type (small, medium, large)
             
         Returns:
-            Dicionário com o resumo e informações adicionais
+            Dictionary with the summary and additional information
         """
         try:
             if summary_type not in self.size_prompts:
-                raise ValueError(f"Tipo de resumo inválido: {summary_type}")
+                raise ValueError(f"Invalid summary type: {summary_type}")
             
             prompt = self._build_prompt(text, summary_type)
             
@@ -35,7 +35,7 @@ class OpenAIService:
                 messages=[
                     {
                         "role": "system", 
-                        "content": "Você é um assistente especializado em criar resumos claros e precisos de textos."
+                        "content": "You are an assistant specialized in creating clear and accurate text summaries."
                     },
                     {
                         "role": "user", 
@@ -56,24 +56,24 @@ class OpenAIService:
             }
             
         except Exception as e:
-            raise OpenAIException(f"Erro ao gerar resumo: {str(e)}")
+            raise OpenAIException(f"Error generating summary: {str(e)}")
     
     def _build_prompt(self, text: str, summary_type: str) -> str:
         """
-        Constrói o prompt para a API da OpenAI
+        Builds the prompt for the OpenAI API
         
         Args:
-            text: Texto original
-            summary_type: Tipo de resumo
+            text: Original text
+            summary_type: Summary type
             
         Returns:
-            Prompt formatado
+            Formatted prompt
         """
         return f"""
         {self.size_prompts[summary_type]}
         
-        Texto original:
+        Original text:
         {text}
         
-        Resumo:
+        Summary:
         """ 

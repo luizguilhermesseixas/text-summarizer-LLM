@@ -7,7 +7,7 @@ Config.validate()
 
 app = FastAPI(
     title="Text Summarizer API",
-    description="API para geração de resumos de texto usando OpenAI",
+    description="API for text summarization using OpenAI",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
@@ -26,10 +26,10 @@ app.include_router(text_router)
 @app.get("/")
 def read_root():
     """
-    Endpoint raiz da API
+    Root endpoint of the API
     """
     return {
-        "message": "API do Resumidor de Texto está no ar!",
+        "message": "Text Summarizer API is running!",
         "version": "1.0.0",
         "docs": "/docs"
     }
